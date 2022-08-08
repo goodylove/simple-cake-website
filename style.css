@@ -204,6 +204,7 @@
 .search-container {
   border: 1px solid black;
   margin: 20px;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,8 +235,21 @@
   justify-content: space-between;
 }
 .overall-img {
+  opacity: 0;
+}
+.overall-img.show {
+  opacity: 1;
   width: 97%;
-  margin: 5px;
+  margin: 10px;
   background-color: #fff;
   height: auto;
+  animation: move 1s steps(12) forwards;
+}
+@keyframes move {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
