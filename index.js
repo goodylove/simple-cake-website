@@ -1,73 +1,73 @@
 const allStoreItems = [
   {
     photo: "./img/sweets-1.jpeg",
-    name: "sweet item",
+    name: "sweet",
     price: 6,
     tagname: "sweets",
   },
   {
     photo: "./img/sweets-2.jpeg",
-    name: "sweet item",
+    name: "sweet",
     price: 29,
     tagname: "sweets",
   },
   {
     photo: "./img/sweets-3.jpeg",
-    name: "sweet item",
+    name: "sweet",
     price: 61,
     tagname: "sweets",
   },
   {
     photo: "./img/doughnut-1.jpeg",
-    name: "doughnut item",
+    name: "doughnut",
     price: 12,
     tagname: "doughnuts",
   },
   {
     photo: "./img/doughnut-2.jpeg",
-    name: "doughnut item",
+    name: "doughnut",
     price: 10,
     tagname: "doughnuts",
   },
   {
     photo: "./img/doughnut-3.jpeg",
-    name: "doughnut item",
+    name: "doughnut",
     price: 19,
     tagname: "doughnuts",
   },
   {
     photo: "./img/cupcake-1.jpeg",
-    name: "cupcake item",
+    name: "cupcake",
     price: 62,
     tagname: "cupcakes",
   },
   {
     photo: "./img/cupcake-2.jpeg",
-    name: "cupcake item",
+    name: "cupcake",
     price: 12,
     tagname: "cupcakes",
   },
   {
     photo: "./img/cupcake-3.jpeg",
-    name: "cupcake item",
+    name: "cupcake",
     price: 18,
     tagname: "cupcakes",
   },
   {
     photo: "./img/cake-1.jpeg",
-    name: "cake item",
+    name: "cake",
     price: 23,
     tagname: "cakes",
   },
   {
     photo: "./img/cake-2.jpeg",
-    name: "cake item",
+    name: "cake",
     price: 20,
     tagname: "cakes",
   },
   {
     photo: "./img/cake-3.jpeg",
-    name: "cake item",
+    name: "cake",
     price: 13,
     tagname: "cakes",
   },
@@ -160,3 +160,13 @@ function observeItems(observe) {
   });
 }
 observeItems();
+
+const hambuger = document.querySelector(".icons-cont");
+const mobile = document.querySelector(".mobile");
+hambuger.addEventListener("click", () => {
+  mobile.classList.toggle("more");
+});
+const timeIcon = document.querySelector(".time-icon");
+timeIcon.addEventListener("click", () => {
+  mobile.classList.remove("more");
+});
