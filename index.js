@@ -21,24 +21,24 @@ const allStoreItems = [
     photo: "./img/doughnut-1.jpeg",
     name: "doughnut item",
     price: 12,
-    tagname: "doughnut",
+    tagname: "doughnuts",
   },
   {
     photo: "./img/doughnut-2.jpeg",
     name: "doughnut item",
-    price: 12,
-    tagname: "doughnut",
+    price: 10,
+    tagname: "doughnuts",
   },
   {
     photo: "./img/doughnut-3.jpeg",
     name: "doughnut item",
-    price: 12,
-    tagname: "doughnut",
+    price: 19,
+    tagname: "doughnuts",
   },
   {
     photo: "./img/cupcake-1.jpeg",
     name: "cupcake item",
-    price: 12,
+    price: 62,
     tagname: "cupcakes",
   },
   {
@@ -50,8 +50,8 @@ const allStoreItems = [
   {
     photo: "./img/cupcake-3.jpeg",
     name: "cupcake item",
-    price: 12,
-    tagname: "cupecakes",
+    price: 18,
+    tagname: "cupcakes",
   },
   {
     photo: "./img/cake-1.jpeg",
@@ -83,8 +83,65 @@ const showStoreItems = allStoreItems.map((p) => {
    </div>
  </div>`;
 });
-const ourImage = (document.querySelector(".our-img").innerHTML =
-  showStoreItems.join(""));
+
+const ourImage = document.querySelector(".our-img");
+ourImage.innerHTML = showStoreItems.join("");
+
+const storeBtn = document.querySelectorAll(".store-btn");
+
+storeBtn.forEach((btns) => {
+  btns.addEventListener("click", () => {
+    const btnValue = btns.value.toLowerCase();
+
+    if (btnValue == "all") {
+      ourImage.innerHTML = showStoreItems.join("");
+    } else {
+      const filterStore = allStoreItems.filter((items) => {
+        return btnValue === items.tagname;
+      });
+      const display = filterStore.map((p) => {
+        return `<div class="overall-img">
+         <div class="my-img">
+           <img src="${p.photo}" class="imgs" />
+         </div>
+         <div class="content">
+           <div class="item-nmae">${p.name}</div>
+           <div class="item price">$${p.price}</div>
+         </div>
+       </div>`;
+      });
+      ourImage.innerHTML = display.join("");
+    }
+  });
+});
+
+const search = document.querySelector(".search");
+search.addEventListener("keyup", activateSearch);
+
+function activateSearch(e) {
+  const searchValue = search.value.toLowerCase();
+  if (e.key == "Enter" && searchValue) {
+    if (searchValue == "all") {
+      ourImage.innerHTML = showStoreItems.join("");
+    } else {
+      const filterStore = allStoreItems.filter((items) => {
+        return searchValue === items.tagname;
+      });
+      const display = filterStore.map((p) => {
+        return `<div class="overall-img">
+          <div class="my-img">
+            <img src="${p.photo}" class="imgs" />
+          </div>
+          <div class="content">
+            <div class="item-nmae">${p.name}</div>
+            <div class="item price">$${p.price}</div>
+          </div>
+        </div>`;
+      });
+      ourImage.innerHTML = display.join("");
+    }
+  }
+}
 
 const imgCont = document.querySelectorAll(".overall-img");
 
