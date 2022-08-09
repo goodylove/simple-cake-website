@@ -85,32 +85,39 @@ const showStoreItems = allStoreItems.map((p) => {
 });
 
 const ourImage = document.querySelector(".our-img");
-ourImage.innerHTML = showStoreItems.join("");
+function showAll(showStoreItems) {
+  ourImage.innerHTML = showStoreItems.join("");
+}
+showAll(showStoreItems);
+
+function handleClick(btnValue) {
+  const filterStore = allStoreItems.filter((items) => {
+    return btnValue === items.tagname;
+  });
+  const display = filterStore.map((p) => {
+    return `<div class="overall-img">
+       <div class="my-img">
+         <img src="${p.photo}" class="imgs" />
+       </div>
+       <div class="content">
+         <div class="item-nmae">${p.name}</div>
+         <div class="item price">$${p.price}</div>
+       </div>
+     </div>`;
+  });
+  showAll(display);
+  observeItems(showStoreItems);
+}
 
 const storeBtn = document.querySelectorAll(".store-btn");
-
 storeBtn.forEach((btns) => {
   btns.addEventListener("click", () => {
     const btnValue = btns.value.toLowerCase();
-
     if (btnValue == "all") {
-      ourImage.innerHTML = showStoreItems.join("");
+      showAll(showStoreItems);
+      observeItems(showStoreItems);
     } else {
-      const filterStore = allStoreItems.filter((items) => {
-        return btnValue === items.tagname;
-      });
-      const display = filterStore.map((p) => {
-        return `<div class="overall-img">
-         <div class="my-img">
-           <img src="${p.photo}" class="imgs" />
-         </div>
-         <div class="content">
-           <div class="item-nmae">${p.name}</div>
-           <div class="item price">$${p.price}</div>
-         </div>
-       </div>`;
-      });
-      ourImage.innerHTML = display.join("");
+      handleClick(btnValue);
     }
   });
 });
@@ -122,42 +129,34 @@ function activateSearch(e) {
   const searchValue = search.value.toLowerCase();
   if (e.key == "Enter" && searchValue) {
     if (searchValue == "all") {
-      ourImage.innerHTML = showStoreItems.join("");
+      showAll(showStoreItems);
+      observeItems(showStoreItems);
     } else {
-      const filterStore = allStoreItems.filter((items) => {
-        return searchValue === items.tagname;
-      });
-      const display = filterStore.map((p) => {
-        return `<div class="overall-img">
-          <div class="my-img">
-            <img src="${p.photo}" class="imgs" />
-          </div>
-          <div class="content">
-            <div class="item-nmae">${p.name}</div>
-            <div class="item price">$${p.price}</div>
-          </div>
-        </div>`;
-      });
-      ourImage.innerHTML = display.join("");
+      handleClick(searchValue);
+      showAll(display);
+      observeItems(showStoreItems);
     }
   }
 }
 
-const imgCont = document.querySelectorAll(".overall-img");
+function observeItems(observe) {
+  const imgCont = document.querySelectorAll(".overall-img");
+  const observer = new IntersectionObserver(
+    (enteries) => {
+      enteries.forEach((e) => {
+        e.target.classList.toggle("show", e.isIntersecting);
+        e.isIntersecting
+          ? observer.unobserve(e.target)
+          : observer.observe(e.target);
+      });
+    },
+    {
+      threshold: 1,
+    }
+  );
 
-const observer = new IntersectionObserver(
-  (enteries) => {
-    enteries.forEach((e) => {
-      e.target.classList.toggle("show", e.isIntersecting);
-      e.isIntersecting
-        ? observer.unobserve(e.target)
-        : observer.observe(e.target);
-    });
-  },
-  {
-    threshold: 1,
-  }
-);
-imgCont.forEach((e) => {
-  observer.observe(e);
-});
+  imgCont.forEach((e) => {
+    observer.observe(e);
+  });
+}
+observeItems();
