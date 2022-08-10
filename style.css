@@ -305,7 +305,7 @@
   flex-direction: column;
   align-items: center;
   clip-path: circle(150px at 100% -30%);
-  transition: 0.9s;
+  transition: 1s;
 }
 .mobile.more {
   clip-path: circle(1500px at 100% -30%);

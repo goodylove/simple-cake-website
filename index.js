@@ -1,19 +1,19 @@
 const allStoreItems = [
   {
     photo: "./img/sweets-1.jpeg",
-    name: "sweet",
+    name: "sweets",
     price: 6,
     tagname: "sweets",
   },
   {
     photo: "./img/sweets-2.jpeg",
-    name: "sweet",
+    name: "sweets",
     price: 29,
     tagname: "sweets",
   },
   {
     photo: "./img/sweets-3.jpeg",
-    name: "sweet",
+    name: "sweets",
     price: 61,
     tagname: "sweets",
   },
@@ -125,18 +125,27 @@ storeBtn.forEach((btns) => {
 const search = document.querySelector(".search");
 search.addEventListener("keyup", activateSearch);
 
-function activateSearch(e) {
-  const searchValue = search.value.toLowerCase();
-  if (e.key == "Enter" && searchValue) {
-    if (searchValue == "all") {
-      showAll(showStoreItems);
-      observeItems(showStoreItems);
+function activateSearch() {
+  const searchDisplay = allStoreItems.filter((item) => {
+    const searchValue = search.value.toLowerCase();
+    if (item.name.includes(searchValue)) {
+      return item;
     } else {
-      handleClick(searchValue);
-      showAll(display);
-      observeItems(showStoreItems);
+      searchValue === item.name;
     }
-  }
+  });
+  const finallDisplay = searchDisplay.map((v) => {
+    return `<div class="overall-img">
+         <div class="my-img">
+           <img src="${v.photo}" class="imgs" />
+         </div>
+         <div class="content">
+           <div class="item-nmae">${v.name}</div>
+           <div class="item price">$${v.price}</div>
+         </div>
+       </div>`;
+  });
+  showAll(finallDisplay);
 }
 
 function observeItems(observe) {
