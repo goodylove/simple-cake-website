@@ -259,7 +259,7 @@
 .our-img {
   display: grid;
   justify-items: center;
-  width: 89%;
+  width: 84%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-row: 10px;
   grid-column: 20px;
